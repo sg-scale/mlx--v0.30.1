@@ -20,7 +20,7 @@ jobs:
     name: Check Lint
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: pre-commit/action@v3.0.1
 
   linux_build_and_test:
@@ -32,7 +32,7 @@ jobs:
         arch: ['x86_64', 'aarch64']
     runs-on: ${{ matrix.arch == 'x86_64' && 'ubuntu-22.04' || 'ubuntu-22.04-arm' }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup-linux
       - uses: ./.github/actions/build-linux
       - uses: ./.github/actions/test-linux
@@ -48,7 +48,7 @@ jobs:
         toolkit: ['cuda-12.6', 'cuda-12.9']
     runs-on: ${{ matrix.arch == 'x86_64' && 'gpu-t4-4-core' || 'ubuntu-22.04-arm' }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup-linux
         with:
           toolkit: ${{ matrix.toolkit }}
@@ -71,7 +71,7 @@ jobs:
       MACOSX_DEPLOYMENT_TARGET: ${{ matrix.macos-target }}
     needs: check_lint
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup-macos
       - uses: ./.github/actions/build-macos
 
@@ -81,7 +81,7 @@ jobs:
     runs-on: ubuntu-22.04
     needs: check_lint
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/build-docs
 
   linux_fedora_build_cpp:
@@ -101,7 +101,7 @@ jobs:
       image: fedora:42
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: CPP Build Test - No Release
         run: |
